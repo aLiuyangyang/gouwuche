@@ -12,6 +12,7 @@
        android:orientation="horizontal"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
+
        <Button
            android:id="@+id/px"
            android:text="综合排序"
@@ -33,6 +34,10 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.recker.flybanner.FlyBanner
+            android:id="@+id/fly"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"></com.recker.flybanner.FlyBanner>
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xrecy"
         android:layout_width="match_parent"

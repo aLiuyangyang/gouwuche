@@ -1,20 +1,30 @@
 package com.example.rikao20;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.MyLocationStyle;
 
 public class Main2Activity extends AppCompatActivity {
-
+    //private ImageView imageView;
+    /* private   TextView hahaha;*/
     MapView mMapView = null;
     AMap aMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+     /*   hahaha.findViewById(R.id.mstext);
+        Intent intent1=getIntent();
+        String name = intent1.getStringExtra("name");
+        hahaha.setText(name);*/
+
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.map);
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -67,8 +68,14 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                   Intent intent3=new Intent(MainActivity.this,Main2Activity.class);
+                    Log.i("aa",map.toString()+"");
+                    String iconurl = map.get("iconurl");
+                    String name = map.get("name");
+                    Intent intent3=new Intent(MainActivity.this,Main3Activity.class);
+                    intent3.putExtra("iconurl",iconurl);
+                    intent3.putExtra("name",name);
                    startActivity(intent3);
+                   finish();
                 }
 
                 @Override

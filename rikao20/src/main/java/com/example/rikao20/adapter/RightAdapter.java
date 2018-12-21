@@ -2,6 +2,7 @@ package com.example.rikao20.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +45,7 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.ViewHolder> 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         viewHolder.recy1.setLayoutManager(linearLayoutManager);
+        viewHolder.recy1.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
         adapter1= new RightziAdapter(mContext);
         viewHolder.recy1.setAdapter(adapter1);
         adapter1.setListBean(mlist.get(i).getList());

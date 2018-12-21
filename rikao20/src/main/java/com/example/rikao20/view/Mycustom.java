@@ -1,7 +1,12 @@
 package com.example.rikao20.view;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,6 +51,30 @@ public class Mycustom extends RelativeLayout implements View.OnClickListener {
         jia.setOnClickListener(this);
         jian.setOnClickListener(this);
         addView(view);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (editText.getText().toString()==null|editText.getText().equals("")){
+                    Log.i("TAG","PPP");
+                    return;
+                }
+                String string = editText.getText().toString();
+                listBeans.get(position).setNum(Integer.parseInt(string));
+                if (myCusCilck!=null){
+                    myCusCilck.mMyCusCilck();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
   private int num;
     @Override

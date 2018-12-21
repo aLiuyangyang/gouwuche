@@ -1,6 +1,9 @@
 
 package com.example.rikao20;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +22,7 @@ import com.example.rikao20.bean.ShopBean;
 import com.example.rikao20.presenter.Presenterlmpl;
 import com.example.rikao20.view.IView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.recker.flybanner.FlyBanner;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,6 +34,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
       private XRecyclerView xRecyclerView;
       private MyShopAdapter adapter;
       private int page;
+      private FlyBanner fly;
 
       private Button xl,px,jg;
       private String ShopUrl="http://www.zhaoapi.cn/product/searchProducts";
@@ -45,6 +50,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         xl.setOnClickListener(this);
         px=findViewById(R.id.px);
         px.setOnClickListener(this);
+        fly=findViewById(R.id.fly);
         jg=findViewById(R.id.jg);
         jg.setOnClickListener(this);
         xRecyclerView=findViewById(R.id.xrecy);
@@ -99,10 +105,56 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
       switch (v.getId()){
           case R.id.px:
+              final int x = (int) v.getX();
+              final int y = (int) v.getY();
+
+              ObjectAnimator translation_X = ObjectAnimator.ofFloat(v, "translationX", 0,500);
+              //Y轴平移
+              ObjectAnimator translation_Y = ObjectAnimator.ofFloat(v, "translationY", 0,50);
+              //透明度
+              ObjectAnimator alpha = ObjectAnimator.ofFloat(v, "alpha", 1f, 0f);
+              //X轴缩放
+              ObjectAnimator scaleX = ObjectAnimator.ofFloat(v, "scaleX", 1f, 2f);
+              //Y轴缩放
+              ObjectAnimator scaleY = ObjectAnimator.ofFloat(v, "scaleY", 1f, 2f);
+              //旋转
+              ObjectAnimator rotation = ObjectAnimator.ofFloat(v, "rotation", 1f, 360f);
+              AnimatorSet animatorSet = new AnimatorSet();
+              animatorSet.setDuration(3000);
+              //大家一起来
+              animatorSet.playTogether(translation_X, translation_Y, alpha, scaleX, scaleY, rotation);
+              animatorSet.addListener(new Animator.AnimatorListener() {
+                  @Override
+                  public void onAnimationStart(Animator animation) {
+
+                  }
+
+                  @Override
+                  public void onAnimationEnd(Animator animation) {
+                        v.setX(x);
+                        v.setY(y);
+                        v.setAlpha(1);
+                        v.setScaleX(1f);
+                        v.setScaleY(1f);
+                        v.setRotation(1f);
+                  }
+
+                  @Override
+                  public void onAnimationCancel(Animator animation) {
+
+                  }
+
+                  @Override
+                  public void onAnimationRepeat(Animator animation) {
+
+                  }
+              });
+              animatorSet.start();
               sort=0;
+              page=1;
               Map<String,String> mar1=new HashMap<>();
               mar1.put("keywords","手机");
               mar1.put("page",page+"");
@@ -110,6 +162,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
               presenterlmpl.setRequestData(ShopUrl,mar1,ShopBean.class);
               break;
           case R.id.xl:
+              page=1;
               sort=1;
               Map<String,String> mar2=new HashMap<>();
               mar2.put("keywords","手机");
@@ -118,6 +171,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
               presenterlmpl.setRequestData(ShopUrl,mar2,ShopBean.class);
               break;
           case R.id.jg:
+              page=1;
               sort=2;
               Map<String,String> mar3=new HashMap<>();
               mar3.put("keywords","手机");
@@ -133,9 +187,11 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     public void setData(Object data) {
         if (data instanceof ShopBean) {
             ShopBean bean = (ShopBean) data;
-//            String images = bean.getData().get(1).getImages();
-//            String[] split = images.split("\\|");
-//            List<String> list = Arrays.asList(split);
+
+           String images = bean.getData().get(1).getImages();
+           String[] split = images.split("\\|");
+            List<String> list = Arrays.asList(split);
+            fly.setImagesUrl(list);
 
             if (page == 1) {
                 adapter.setList(bean.getData());
