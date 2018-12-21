@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+<com.example.rikao20.view.MyTitleView
+    android:id="@+id/tltle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"></com.example.rikao20.view.MyTitleView>
+<com.example.rikao20.view.MyTextView
+    android:text="最近搜索"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <com.example.rikao20.view.MyView
+        android:id="@+id/Myview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></com.example.rikao20.view.MyView>
+    <com.example.rikao20.view.MyTextView
+        android:text="猜你想找"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <com.example.rikao20.view.MyView
+        android:id="@+id/Myview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></com.example.rikao20.view.MyView>
+   <Button
+       android:id="@+id/butt"
+       android:text="二级"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content" />
+    <Button
+    android:text="地图"
+    android:id="@+id/buttt"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <Button
+        android:text="第三方登录"
+        android:id="@+id/but_ds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
